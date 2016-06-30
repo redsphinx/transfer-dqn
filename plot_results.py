@@ -31,6 +31,27 @@ def getAvg(name_list):
     pass
 
 
+def toy_scatter():
+    ca_nips = load_csv("carnival-nips")
+    ca_da_1 = load_csv("carnival_da_2186039")
+    ca_da_2 = load_csv("carnival_da_2215046")
+    ca_da_3 = load_csv("carnival_da_2215048")
+    ca_da = getAvg([ca_da_1, ca_da_2, ca_da_3])
+    ca_si_1 = load_csv("carnival_si_2186032")
+    ca_si_2 = load_csv("carnival_si_2215038")
+    ca_si_3 = load_csv("carnival_si_2215041")
+    ca_si = getAvg([ca_si_1, ca_si_2, ca_si_3])
+    plt.scatter(ca_nips[:, 4], ca_nips[:, 3], label="CA-nips", color=colors[0], linestyle=lines[0])
+    plt.scatter(ca_da[:, 4], ca_da[:, 3], label="DA", color=colors[1], linestyle=lines[1])
+    plt.scatter(ca_si[:, 4], ca_si[:, 3], label="SI", color=colors[2], linestyle=lines[2])
+
+    plt.xlabel("Mean Q")
+    plt.ylabel("Average Reward per Episode")
+    plt.legend(loc="best")
+
+    plt.show()
+    pass
+
 #plot everything
 #epoch,num_episodes,total_reward,reward_per_episode,mean_q
 def all_the_plots_carnival(col):
@@ -121,5 +142,6 @@ if __name__ == "__main__":
     # all_the_plots_sp_in(2)
     # all_the_plots_sp_in(3)
     # all_the_plots_sp_in(4)
+    toy_scatter()
     pass
 
