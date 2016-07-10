@@ -1,15 +1,19 @@
 import numpy as np
+
+from matplotlib.font_manager import findfont, FontProperties
 import matplotlib.pyplot as plt
 import sys
 
 #for smoothing
-kernel = np.array([1.] * 5)
+kernel = np.array([1.] * 3)
 kernel = kernel / np.sum(kernel)
 # PATH = "/home/gabi/Documents/CSDL/deep_q_rl/pkl-results/results/"
-colors = ["#00cc00", "#ff0066", "#336699"]
+# colors = ["red", "black", "#009900",  "#8c1aff", "#ff6600"]
+# colors = ["red", "black", "#ff6600",  "#8c1aff", "#009900"]
+colors = ["green", "blue", "red", "#00D3C6", "black"]
 # lines = ["solid", "dashed", "dotted"]
-lines = ["solid", "solid", "solid"]
-markers = ['o', "s", "*"]
+lines = ["solid", ":"]
+markers = ['o', "s", "^"]
 
 
 def save_plot(name):
@@ -18,7 +22,7 @@ def save_plot(name):
 
 
 def load_csv(name):
-    PATH = "/home/gabi/Documents/CSDL/deep_q_rl/pkl-results/learning/"
+    PATH = "/home/gabi/Documents/CSDL/deep_q_rl/pkl-results/results/"
     return np.loadtxt(open(PATH+str(name)+".csv", "rb"), delimiter=",", skiprows=1) #np.ndarray
 
     pass
@@ -30,6 +34,7 @@ def getAvg(name_list):
         a = np.add(a, name_list[i])
     return a/len(name_list)
     pass
+
 
 def getAvgClp(name_list, clip):
     a = np.zeros(np.shape(name_list[0][0:clip, :]))
@@ -118,109 +123,225 @@ def si_scatter(xcol, ycol):
 #plot everything
 #epoch,num_episodes,total_reward,reward_per_episode,mean_q
 def all_the_plots_carnival(col):
-    ylab = ["Number of Episodes", "Total Reward per Epoch", "Average Reward per Episode", "Average Action Value (Q)"]
+    ylab = ["Number of Episodes", "Total Reward per Epoch", "avg R/epi", "avg Q"]
     savename = ["num_episode_carnival", "tot_rew_epoch_carnival", "avg_rew_episode_carnival", "avg_q_carnival"]
+    llw = 0.5
+    plt.figure(figsize=(14, 3))
+    # print(plt.rcParams.keys())
 
-    ca_nips = load_csv("carnival-nips")
-    ca_da_1 = load_csv("carnival_da_2186039")
-    ca_da_2 = load_csv("carnival_da_2215046")
-    ca_da_3 = load_csv("carnival_da_2215048")
-    ca_da = getAvg([ca_da_1, ca_da_2, ca_da_3])
-    ca_si_1 = load_csv("carnival_si_2186032")
-    ca_si_2 = load_csv("carnival_si_2215038")
-    ca_si_3 = load_csv("carnival_si_2215041")
-    ca_si = getAvg([ca_si_1, ca_si_2, ca_si_3])
-    plt.plot(ca_nips[:, 0], np.convolve(ca_nips[:, col], kernel, mode='same'), label="CA-nips", color=colors[0], linestyle=lines[0])
-    plt.plot(ca_da[:, 0], np.convolve(ca_da[:, col], kernel, mode='same'), label="DA", color=colors[1], linestyle=lines[1])
-    plt.plot(ca_si[:, 0], np.convolve(ca_si[:, col], kernel, mode='same'), label="SI", color=colors[2], linestyle=lines[2])
+    axes = plt.gca()
+    axes.set_ylim([0.5, 2.5])
+    # axes.set_xlim([0, 6000])
+
+    ca_nips = load_csv("carnival_nips_2237007")
+
+    # 50 epoch
+    ca_da_1_50 = load_csv("carnival_50_da_2243663")
+    ca_da_2_50 = load_csv("carnival_50_da_2243665")
+    ca_da_3_50 = load_csv("carnival_50_da_2243667")
+    ca_da_50 = getAvg([ca_da_1_50, ca_da_2_50, ca_da_3_50])
+    ca_si_1_50 = load_csv("carnival_50_si_2243463")
+    ca_si_2_50 = load_csv("carnival_50_si_2243649")
+    ca_si_3_50 = load_csv("carnival_50_si_2243653")
+    ca_si_50 = getAvg([ca_si_1_50, ca_si_2_50, ca_si_3_50])
+    # 100 epoch
+    ca_da_1_100 = load_csv("carnival_100_da_2243669")
+    ca_da_2_100 = load_csv("carnival_100_da_2243672")
+    ca_da_3_100 = load_csv("carnival_100_da_2243676")
+    ca_da_100 = getAvg([ca_da_1_100, ca_da_2_100, ca_da_3_100])
+    ca_si_1_100 = load_csv("carnival_100_si_2243655")
+    ca_si_2_100 = load_csv("carnival_100_si_2243656")
+    ca_si_3_100 = load_csv("carnival_100_si_2243659")
+    ca_si_100 = getAvg([ca_si_1_100, ca_si_2_100, ca_si_3_100])
+
+    plt.plot(ca_nips[:, 0], ca_nips[:, col], label="CA_s", color=colors[0], linestyle=lines[0], lw=llw+0.9)
+
+    plt.plot(ca_da_50[:, 0], ca_da_50[:, col], label="DA 50", color=colors[1], linestyle=lines[0], lw=llw+0.9)
+    plt.plot(ca_da_100[:, 0], ca_da_100[:, col], label="DA 100", color=colors[1], linestyle=lines[1], lw=llw+2.5)
+
+    plt.plot(ca_si_50[:, 0], ca_si_50[:, col], label="SI 50", color=colors[2], linestyle=lines[0], lw=llw+0.9)
+    plt.plot(ca_si_100[:, 0], ca_si_100[:, col], label="SI 100", color=colors[2], linestyle=lines[1], lw=llw+2.5)
+
     plt.ylabel(ylab[col-1])
-    plt.xlabel("Training Epochs")
+    # plt.xlabel("Training Epochs")
     plt.title("Playing Carnival")
-    plt.legend(loc="best")
-    save_plot(savename[col-1])
-    plt.show()
+    # plt.legend(bbox_to_anchor=(1.12, 1.035),borderpad=0.3, fontsize=12)
+    leg=plt.legend(loc=9, borderpad=0.3, fontsize=12, ncol=5)
+
+    # plt.legend(loc="best")
+    for legobj in leg.legendHandles:
+        legobj.set_linewidth(3.0)
+    save_plot(savename[col-1]+"all")
+    # plt.show()
     pass
 
 
 #plot everything
 #epoch,num_episodes,total_reward,reward_per_episode,mean_q
 def all_the_plots_dem_at(col):
-    ylab = ["Number of Episodes", "Total Reward per Epoch", "Average Reward per Episode", "Average Action Value (Q)"]
+    ylab = ["Number of Episodes", "Total Reward per Epoch", "avg R/epi", "avg Q"]
     savename = ["num_episode_dem_at", "tot_rew_epoch_dem_at", "avg_rew_episode_dem_at", "avg_q_dem_at"]
+    mme = 4
+    llw = 0.5
+    ss = 5
 
-    da_nips = load_csv("demon_attack-nips")
-    da_ca_1 = load_csv("demon_attack_ca_2186052")
-    da_ca_2 = load_csv("demon_attack_ca_2215081")
-    da_ca_3 = load_csv("demon_attack_ca_2215086")
-    da_ca = getAvg([da_ca_1, da_ca_2, da_ca_3])
-    da_si_1 = load_csv("demon_attack_si_2186057")
-    da_si_2 = load_csv("demon_attack_si_2215095")
-    da_si_3 = load_csv("demon_attack_si_2215104")
-    da_si = getAvg([da_si_1, da_si_2, da_si_3])
-    plt.plot(da_nips[:, 0], np.convolve(da_nips[:, col], kernel, mode='same'), label="DA-nips", color=colors[0], linestyle=lines[0])
-    plt.plot(da_ca[:, 0], np.convolve(da_ca[:, col], kernel, mode='same'), label="CA", color=colors[1], linestyle=lines[1])
-    plt.plot(da_si[:, 0], np.convolve(da_si[:, col], kernel, mode='same'), label="SI", color=colors[2], linestyle=lines[2])
+
+    plt.figure(figsize=(14, 3))
+    axes = plt.gca()
+    axes.set_ylim([0.5, 2.5])
+    da_nips = load_csv("demon_attack_nips_2237014")
+    #50 epochs
+    da_ca_1_50 = load_csv("demon_attack_50_ca_2244113")
+    da_ca_2_50 = load_csv("demon_attack_50_ca_2244116")
+    da_ca_3_50 = load_csv("demon_attack_50_ca_2244119")
+    da_ca_50 = getAvg([da_ca_1_50, da_ca_2_50, da_ca_3_50])
+    da_si_1_50 = load_csv("demon_attack_50_si_2244128")
+    da_si_2_50 = load_csv("demon_attack_50_si_2244129")
+    da_si_3_50 = load_csv("demon_attack_50_si_2244131")
+    da_si_50 = getAvg([da_si_1_50, da_si_2_50, da_si_3_50])
+    #100 epochs
+    da_ca_1_100 = load_csv("demon_attack_100_ca_2244123")
+    da_ca_2_100 = load_csv("demon_attack_100_ca_2244125")
+    da_ca_3_100 = load_csv("demon_attack_100_ca_2244126")
+    da_ca_100 = getAvg([da_ca_1_100, da_ca_2_100, da_ca_3_100])
+    da_si_1_100 = load_csv("demon_attack_100_si_2244201")
+    da_si_2_100 = load_csv("demon_attack_100_si_2244204")
+    da_si_3_100 = load_csv("demon_attack_100_si_2244206")
+    da_si_100 = getAvg([da_si_1_100, da_si_2_100, da_si_3_100])
+    plt.plot(da_nips[:, 0], da_nips[:, col], label="DA_s", color=colors[0], linestyle=lines[0], lw=llw+0.9)
+
+    plt.plot(da_ca_50[:, 0], da_ca_50[:, col], label="CA 50", color=colors[1], linestyle=lines[0], lw=llw+0.9)
+    plt.plot(da_ca_100[:, 0], da_ca_100[:, col], label="CA 100", color=colors[1], linestyle=lines[1], lw=llw+2.5)
+
+    plt.plot(da_si_50[:, 0], da_si_50[:, col], label="SI 50", color=colors[2], linestyle=lines[0], lw=llw+0.9)
+    plt.plot(da_si_100[:, 0], da_si_100[:, col], label="SI 100", color=colors[2], linestyle=lines[1], lw=llw+2.5)
+
     plt.ylabel(ylab[col-1])
-    plt.xlabel("Training Epochs")
+    # plt.xlabel("Training Epochs")
     plt.title("Playing Demon Attack")
-    plt.legend(loc="best")
-    save_plot(savename[col-1])
-    plt.show()
+    # plt.legend(bbox_to_anchor=(1.12, 1.035),borderpad=0.3, fontsize=12)
+    leg = plt.legend(loc=9, borderpad=0.3, fontsize=12, ncol=5)
+    for legobj in leg.legendHandles:
+        legobj.set_linewidth(3.0)
+    save_plot(savename[col-1]+"all")
+    # plt.show()
     pass
 
 
 #plot everything
 #epoch,num_episodes,total_reward,reward_per_episode,mean_q
 def all_the_plots_sp_in(col):
-    ylab = ["Number of Episodes", "Total Reward per Epoch", "Average Reward per Episode", "Average Action Value (Q)"]
+    ylab = ["Number of Episodes", "Total Reward per Epoch", "avg R/epi", "avg Q"]
     savename = ["num_episode_sp_in", "tot_rew_epoch_sp_in", "avg_rew_episode_sp_in", "avg_q_sp_in"]
+    llw = 0.5
+    plt.figure(figsize=(14, 3))
+    si_nips = load_csv("space_invaders_nips_2237009")
+    plt.subplot(111)
+    axes = plt.gca()
+    axes.set_ylim([0.5, 2.5])
+    #50 epoch
+    si_ca_1_50 = load_csv("space_invaders_50_ca_2243679")
+    si_ca_2_50 = load_csv("space_invaders_50_ca_2243681")
+    si_ca_3_50 = load_csv("space_invaders_50_ca_2243682")
+    si_ca_50 = getAvg([si_ca_1_50, si_ca_2_50, si_ca_3_50])
+    si_da_1_50 = load_csv("space_invaders_50_da_2244102")
+    si_da_2_50 = load_csv("space_invaders_50_da_2244105")
+    si_da_3_50 = load_csv("space_invaders_50_da_2244106")
+    si_da_50 = getAvg([si_da_1_50, si_da_2_50, si_da_3_50])
+    #100 epoch
+    si_ca_1_100 = load_csv("space_invaders_100_ca_2243684")
+    si_ca_2_100 = load_csv("space_invaders_100_ca_2243695")
+    si_ca_3_100 = load_csv("space_invaders_100_ca_2244098")
+    si_ca_100 = getAvg([si_ca_1_100, si_ca_2_100, si_ca_3_100])
+    si_da_1_100 = load_csv("space_invaders_100_da_2244108")
+    si_da_2_100 = load_csv("space_invaders_100_da_2244110")
+    si_da_3_100 = load_csv("space_invaders_100_da_2244111")
+    si_da_100 = getAvg([si_da_1_100, si_da_2_100, si_da_3_100])
+    plt.plot(si_nips[:, 0], si_nips[:, col], label="SI_s", color=colors[0], linestyle=lines[0], lw=llw+0.9)
 
-    si_nips = load_csv("space_invaders-nips")
-    si_ca_1 = load_csv("space_invaders_ca_2186042")
-    si_ca_2 = load_csv("space_invaders_ca_2215055")
-    si_ca_3 = load_csv("space_invaders_ca_2215056")
-    si_ca = getAvg([si_ca_1, si_ca_2, si_ca_3])
-    si_da_1 = load_csv("space_invaders_da_2186047")
-    si_da_2 = load_csv("space_invaders_da_2215058")
-    si_da_3 = load_csv("space_invaders_da_2215059")
-    si_da = getAvg([si_da_1, si_da_2, si_da_3])
-    plt.plot(si_nips[:, 0], np.convolve(si_nips[:, col], kernel, mode='same'), label="SI-nips", color=colors[0], linestyle=lines[0])
-    plt.plot(si_ca[:, 0], np.convolve(si_ca[:, col], kernel, mode='same'), label="CA", color=colors[1], linestyle=lines[1])
-    plt.plot(si_da[:, 0], np.convolve(si_da[:, col], kernel, mode='same'), label="DA", color=colors[2], linestyle=lines[2])
+    plt.plot(si_ca_50[:, 0], si_ca_50[:, col], label="CA 50", color=colors[1], linestyle=lines[0], lw=llw+0.9)
+    plt.plot(si_ca_100[:, 0], si_ca_100[:, col], label="CA 100", color=colors[1], linestyle=lines[1], lw=llw+2.5)
+
+    plt.plot(si_da_50[:, 0], si_da_50[:, col], label="DA 50", color=colors[2], linestyle=lines[0], lw=llw+0.9)
+    plt.plot(si_da_100[:, 0], si_da_100[:, col], label="DA 100", color=colors[2], linestyle=lines[1], lw=llw+2.5)
+
     plt.ylabel(ylab[col-1])
     plt.xlabel("Training Epochs")
     plt.title("Playing Space Invaders")
-    plt.legend(loc="best")
-    save_plot(savename[col-1])
-    plt.show()
+    # plt.legend(loc="best")
+    # plt.legend(bbox_to_anchor=(1.12, 1.035),borderpad=0.3, fontsize=12)
+    leg=plt.legend(loc=9, borderpad=0.3, fontsize=12, ncol=5)
+    for legobj in leg.legendHandles:
+        legobj.set_linewidth(3.0)
+    save_plot(savename[col-1]+"all")
+    # plt.show()
     pass
 
 
 def plot_loss_ca():
-    ylab = ["Number of Episodes", "Total Reward per Epoch", "Average Reward per Episode", "Average Action Value (Q)"]
-    savename = ["num_episode_carnival", "tot_rew_epoch_carnival", "avg_rew_episode_carnival", "avg_q_carnival"]
+    llw = 1
+    plt.figure(figsize=(14, 3))
     clip = 9900
-    ca_nips = load_csv("carnival-nips")
-    ca_da_1 = load_csv("carnival_da_2186039")
-    ca_da_2 = load_csv("carnival_da_2215046")
-    ca_da_3 = load_csv("carnival_da_2215048")
-    ca_da = getAvgClp([ca_da_1, ca_da_2, ca_da_3], clip)
-    ca_si_1 = load_csv("carnival_si_2186032")
-    ca_si_2 = load_csv("carnival_si_2215038")
-    ca_si_3 = load_csv("carnival_si_2215041")
-    ca_si = getAvgClp([ca_si_1, ca_si_2, ca_si_3], clip)
-    plt.plot(np.convolve(ca_nips[0:clip, 0], kernel, mode='same'), label="CA-nips", color=colors[0],
-             linestyle=lines[0])
-    plt.plot(np.convolve(ca_da[:, 0], kernel, mode='same'), label="DA", color=colors[1],
-             linestyle=lines[1])
-    plt.plot(np.convolve(ca_si[:, 0], kernel, mode='same'), label="SI", color=colors[2],
-             linestyle=lines[2])
+    kernel = np.array([1.] * 8)
+    kernel = kernel / np.sum(kernel)
+
+    ca_nips = load_csv("carnival_nips_2237007")
+    # 50 epoch
+    ca_da_1_50 = load_csv("carnival_50_da_2243663")
+    ca_da_2_50 = load_csv("carnival_50_da_2243665")
+    ca_da_3_50 = load_csv("carnival_50_da_2243667")
+    ca_da_50 = getAvgClp([ca_da_1_50, ca_da_2_50, ca_da_3_50], clip)
+    ca_si_1_50 = load_csv("carnival_50_si_2243463")
+    ca_si_2_50 = load_csv("carnival_50_si_2243649")
+    ca_si_3_50 = load_csv("carnival_50_si_2243653")
+    ca_si_50 = getAvgClp([ca_si_1_50, ca_si_2_50, ca_si_3_50], clip)
+    # 100 epoch
+    ca_da_1_100 = load_csv("carnival_100_da_2243669")
+    ca_da_2_100 = load_csv("carnival_100_da_2243672")
+    ca_da_3_100 = load_csv("carnival_100_da_2243676")
+    ca_da_100 = getAvgClp([ca_da_1_100, ca_da_2_100, ca_da_3_100], clip)
+    ca_si_1_100 = load_csv("carnival_100_si_2243655")
+    ca_si_2_100 = load_csv("carnival_100_si_2243656")
+    ca_si_3_100 = load_csv("carnival_100_si_2243659")
+    ca_si_100 = getAvgClp([ca_si_1_100, ca_si_2_100, ca_si_3_100], clip)
+    axes = plt.gca()
+    axes.set_ylim([0.07, 0.17])
+    axes.set_xlim([0,9800])
+    # li_ca_nips = ca0_da_50[0:clip, 0].tolist()
+    # print(max(li_ca_nips))
+    print(max(ca_nips[0:clip, 0].tolist()))
+    print(max(ca_da_50[0:clip, 0].tolist()))
+    print(max(ca_da_100[0:clip, 0].tolist()))
+    print(max(ca_si_50[0:clip, 0].tolist()))
+    print(max(ca_si_100[0:clip, 0].tolist()))
+
+    colors = ["green", "blue", "#00D3C6", "black", "grey"]
+
+    plt.plot(np.convolve(ca_nips[0:clip, 0], kernel, mode="same"), label="CA_s", color=colors[0], linestyle=lines[0], lw=0.9)
+
+    plt.plot(np.convolve(ca_da_50[:, 0], kernel, mode="same"), label="DA 50", color=colors[1], linestyle=lines[0], lw=0.9)
+    plt.plot(np.convolve(ca_da_100[:, 0], kernel, mode="same"), label="DA 100", color=colors[2], linestyle=lines[0], lw=0.9)
+
+    plt.plot(np.convolve(ca_si_50[:, 0], kernel, mode="same"), label="SI 50", color=colors[3], linestyle=lines[0], lw=0.9)
+    plt.plot(np.convolve(ca_si_100[:, 0], kernel, mode="same"), label="SI 100", color=colors[4], linestyle=lines[0], lw=0.9)
+
+
+    # plt.plot(np.convolve(ca_nips[0:clip, 0], kernel, mode='same'), label="CA-nips", color=colors[0],
+    #          linestyle=lines[0])
+    # plt.plot(np.convolve(ca_da[:, 0], kernel, mode='same'), label="DA", color=colors[1],
+    #          linestyle=lines[1])
+    # plt.plot(np.convolve(ca_si[:, 0], kernel, mode='same'), label="SI", color=colors[2],
+    #          linestyle=lines[2])
+
     plt.ylabel("Avg Loss")
     plt.xlabel("Total Updates")
     plt.title("Loss Carnival")
-    plt.legend(loc="best")
+    # plt.legend(loc="best")
+    leg = plt.legend(loc=8, borderpad=0.3, fontsize=12, ncol=5)
+    for legobj in leg.legendHandles:
+        legobj.set_linewidth(3.0)
     save_plot("carnival_loss")
-    plt.show()
+    # plt.show()
 
     pass
 
@@ -228,71 +349,126 @@ def plot_loss_da():
     ylab = ["Number of Episodes", "Total Reward per Epoch", "Average Reward per Episode", "Average Action Value (Q)"]
     savename = ["num_episode_carnival", "tot_rew_epoch_carnival", "avg_rew_episode_carnival", "avg_q_carnival"]
     clip = 6000
-    da_nips = load_csv("demon_attack-nips")
-    da_ca_1 = load_csv("demon_attack_ca_2186052")
-    da_ca_2 = load_csv("demon_attack_ca_2215081")
-    da_ca_3 = load_csv("demon_attack_ca_2215086")
-    da_ca = getAvgClp([da_ca_1, da_ca_2, da_ca_3], clip)
-    da_si_1 = load_csv("demon_attack_si_2186057")
-    da_si_2 = load_csv("demon_attack_si_2215095")
-    da_si_3 = load_csv("demon_attack_si_2215104")
-    da_si = getAvgClp([da_si_1, da_si_2, da_si_3], clip)
-    plt.plot(np.convolve(da_nips[0:clip, 0], kernel, mode='same'), label="DA-nips", color=colors[0],
-             linestyle=lines[0])
-    plt.plot(np.convolve(da_ca[:, 0], kernel, mode='same'), label="CA", color=colors[1],
-             linestyle=lines[1])
-    plt.plot(np.convolve(da_si[:, 0], kernel, mode='same'), label="SI", color=colors[2],
-             linestyle=lines[2])
+    kernel = np.array([1.] * 3)
+    kernel = kernel / np.sum(kernel)
+
+    plt.figure(figsize=(14, 3))
+    da_nips = load_csv("demon_attack_nips_2237014")
+    # 50 epochs
+    da_ca_1_50 = load_csv("demon_attack_50_ca_2244113")
+    da_ca_2_50 = load_csv("demon_attack_50_ca_2244116")
+    da_ca_3_50 = load_csv("demon_attack_50_ca_2244119")
+    da_ca_50 = getAvgClp([da_ca_1_50, da_ca_2_50, da_ca_3_50], clip)
+    da_si_1_50 = load_csv("demon_attack_50_si_2244128")
+    da_si_2_50 = load_csv("demon_attack_50_si_2244129")
+    da_si_3_50 = load_csv("demon_attack_50_si_2244131")
+    da_si_50 = getAvgClp([da_si_1_50, da_si_2_50, da_si_3_50], clip)
+    # 100 epochs
+    da_ca_1_100 = load_csv("demon_attack_100_ca_2244123")
+    da_ca_2_100 = load_csv("demon_attack_100_ca_2244125")
+    da_ca_3_100 = load_csv("demon_attack_100_ca_2244126")
+    da_ca_100 = getAvgClp([da_ca_1_100, da_ca_2_100, da_ca_3_100], clip)
+    da_si_1_100 = load_csv("demon_attack_100_si_2244201")
+    da_si_2_100 = load_csv("demon_attack_100_si_2244204")
+    da_si_3_100 = load_csv("demon_attack_100_si_2244206")
+    da_si_100 = getAvgClp([da_si_1_100, da_si_2_100, da_si_3_100], clip)
+
+    axes = plt.gca()
+    axes.set_ylim([0.07, 0.13])
+    axes.set_xlim([0,6000])
+
+    colors = ["green", "blue", "#00D3C6", "black", "grey"]
+
+    plt.plot(np.convolve(da_nips[0:clip, 0], kernel, mode="same"), label="DA_s", color=colors[0], linestyle=lines[0], lw=0.9)
+
+    plt.plot(np.convolve(da_ca_50[:, 0], kernel, mode="same"), label="CA 50", color=colors[1], linestyle=lines[0], lw=0.9)
+    plt.plot(np.convolve(da_ca_100[:, 0], kernel, mode="same"), label="CA 100", color=colors[2], linestyle=lines[0], lw=0.9)
+
+    plt.plot(np.convolve(da_si_50[:, 0], kernel, mode="same"), label="SI 50", color=colors[3], linestyle=lines[0], lw=0.9)
+    plt.plot(np.convolve(da_si_100[:, 0], kernel, mode="same"), label="SI 100", color=colors[4], linestyle=lines[0], lw=0.9)
+
     plt.ylabel("Avg Loss")
     plt.xlabel("Total Updates")
     plt.title("Loss Demon Attack")
-    plt.legend(loc="best")
+    leg = plt.legend(loc=8, borderpad=0.3, fontsize=12, ncol=5)
+    for legobj in leg.legendHandles:
+        legobj.set_linewidth(3.0)
     save_plot("demonattack_loss")
-    plt.show()
+    # plt.show()
 
     pass
 
 def plot_loss_si():
+
     ylab = ["Number of Episodes", "Total Reward per Epoch", "Average Reward per Episode", "Average Action Value (Q)"]
     savename = ["num_episode_carnival", "tot_rew_epoch_carnival", "avg_rew_episode_carnival", "avg_q_carnival"]
     clip = 7500
-    si_nips = load_csv("space_invaders-nips")
-    si_ca_1 = load_csv("space_invaders_ca_2186042")
-    si_ca_2 = load_csv("space_invaders_ca_2215055")
-    si_ca_3 = load_csv("space_invaders_ca_2215056")
-    si_ca = getAvgClp([si_ca_1, si_ca_2, si_ca_3], clip)
-    si_da_1 = load_csv("space_invaders_da_2186047")
-    si_da_2 = load_csv("space_invaders_da_2215058")
-    si_da_3 = load_csv("space_invaders_da_2215059")
-    si_da = getAvgClp([si_da_1, si_da_2, si_da_3], clip)
-    plt.plot(np.convolve(si_nips[0:clip, 0], kernel, mode='same'), label="SI-nips", color=colors[0],
-             linestyle=lines[0])
-    plt.plot(np.convolve(si_ca[:, 0], kernel, mode='same'), label="CA", color=colors[1],
-             linestyle=lines[1])
-    plt.plot(np.convolve(si_da[:, 0], kernel, mode='same'), label="DA", color=colors[2],
-             linestyle=lines[2])
+    kernel = np.array([1.] * 3)
+    kernel = kernel / np.sum(kernel)
+
+    plt.figure(figsize=(14, 3))
+    si_nips = load_csv("space_invaders_nips_2237009")
+    #50 epoch
+    si_ca_1_50 = load_csv("space_invaders_50_ca_2243679")
+    si_ca_2_50 = load_csv("space_invaders_50_ca_2243681")
+    si_ca_3_50 = load_csv("space_invaders_50_ca_2243682")
+    si_ca_50 = getAvgClp([si_ca_1_50, si_ca_2_50, si_ca_3_50], clip)
+    si_da_1_50 = load_csv("space_invaders_50_da_2244102")
+    si_da_2_50 = load_csv("space_invaders_50_da_2244105")
+    si_da_3_50 = load_csv("space_invaders_50_da_2244106")
+    si_da_50 = getAvgClp([si_da_1_50, si_da_2_50, si_da_3_50], clip)
+    #100 epoch
+    si_ca_1_100 = load_csv("space_invaders_100_ca_2243684")
+    si_ca_2_100 = load_csv("space_invaders_100_ca_2243695")
+    si_ca_3_100 = load_csv("space_invaders_100_ca_2244098")
+    si_ca_100 = getAvgClp([si_ca_1_100, si_ca_2_100, si_ca_3_100], clip)
+    si_da_1_100 = load_csv("space_invaders_100_da_2244108")
+    si_da_2_100 = load_csv("space_invaders_100_da_2244110")
+    si_da_3_100 = load_csv("space_invaders_100_da_2244111")
+    si_da_100 = getAvgClp([si_da_1_100, si_da_2_100, si_da_3_100], clip)
+
+    axes = plt.gca()
+    axes.set_ylim([0.07, 0.15])
+    axes.set_xlim([0, 7480])
+
+    colors = ["green", "blue", "#00D3C6", "black", "grey"]
+
+    plt.plot(np.convolve(si_nips[0:clip, 0], kernel, mode="same"), label="SI_s", color=colors[0], linestyle=lines[0], lw=0.9)
+
+    plt.plot(np.convolve(si_ca_50[:, 0], kernel, mode="same"), label="CA 50", color=colors[1], linestyle=lines[0], lw=0.9)
+    plt.plot(np.convolve(si_ca_100[:, 0], kernel, mode="same"), label="CA 100", color=colors[2], linestyle=lines[0], lw=0.9)
+
+    plt.plot(np.convolve(si_da_50[:, 0], kernel, mode="same"), label="DA 50", color=colors[3], linestyle=lines[0], lw=0.9)
+    plt.plot(np.convolve(si_da_100[:, 0], kernel, mode="same"), label="DA 100", color=colors[4], linestyle=lines[0], lw=0.9)
+
     plt.ylabel("Avg Loss")
     plt.xlabel("Total Updates")
     plt.title("Loss Space Invaders")
-    plt.legend(loc="best")
+    leg = plt.legend(loc=8, borderpad=0.3, fontsize=12, ncol=5)
+    for legobj in leg.legendHandles:
+        legobj.set_linewidth(3.0)
     save_plot("spaceinvaders_loss")
-    plt.show()
+    # plt.show()
 
     pass
 
 
+
+
 if __name__ == "__main__":
-    # path = "results/carnival-nips.csv"
-    # original(path)
-    # all_the_plots_carnival(4)
-    # all_the_plots_dem_at(1)
-    # all_the_plots_sp_in(1)
-    # all_the_plots_sp_in(2)
+    font = findfont(FontProperties(family=['sans-serif']))
+    print(font)
+
+    # all_the_plots_carnival(3)
+    all_the_plots_carnival(4)
+    # all_the_plots_dem_at(3)
+    all_the_plots_dem_at(4)
     # all_the_plots_sp_in(3)
-    # all_the_plots_sp_in(4)
-    # epoch,num_episodes,total_reward,reward_per_episode,mean_q
-    # carnival_scatter(1, 2)
-    # da_scatter(2,3)
+    all_the_plots_sp_in(4)
+    # plot_loss_ca()
+    # plot_loss_da()
     # plot_loss_si()
+
+    plt.show()
     pass
 
