@@ -1,0 +1,1 @@
+"<lasagne.layers.input.InputLayer object at 0x2afba582cf90>","<lasagne.layers.dnn.Conv2DDNNLayer object at 0x2afba4e45990>","<lasagne.layers.dnn.Conv2DDNNLayer object at 0x2afba4e4a190>","<lasagne.layers.dense.DenseLayer object at 0x2afba4e85990>","<lasagne.layers.dense.DenseLayer object at 0x2afbafc37690>"
