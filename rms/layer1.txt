@@ -1,4 +1,5 @@
 Using gpu device 0: Tesla K40m (CNMeM is disabled, cuDNN 4007)
+layer 1
 carnival_nips_50_2237007.pkl
 carnival_nips_50_2237007.pkl
 0.0
@@ -12,6 +13,7 @@ space_invaders_nips_50_2237009.pkl
 0.441168
 space_invaders_nips_2237009.pkl
 0.496413
+
 carnival_nips_2237007.pkl
 carnival_nips_50_2237007.pkl
 0.330606
@@ -25,6 +27,7 @@ space_invaders_nips_50_2237009.pkl
 0.615712
 space_invaders_nips_2237009.pkl
 0.656092
+
 demon_attack_nips_50_2237014.pkl
 carnival_nips_50_2237007.pkl
 0.400901
@@ -38,6 +41,7 @@ space_invaders_nips_50_2237009.pkl
 0.369546
 space_invaders_nips_2237009.pkl
 0.430823
+
 demon_attack_nips_2237014.pkl
 carnival_nips_50_2237007.pkl
 0.436492
@@ -51,6 +55,7 @@ space_invaders_nips_50_2237009.pkl
 0.401304
 space_invaders_nips_2237009.pkl
 0.455846
+
 space_invaders_nips_50_2237009.pkl
 carnival_nips_50_2237007.pkl
 0.441168
@@ -64,6 +69,7 @@ space_invaders_nips_50_2237009.pkl
 0.0
 space_invaders_nips_2237009.pkl
 0.140522
+
 space_invaders_nips_2237009.pkl
 carnival_nips_50_2237007.pkl
 0.496413

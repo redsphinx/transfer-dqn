@@ -1,0 +1,69 @@
+avg_rew_episode_carnival ca original
+2450.95238095
+avg_rew_episode_carnival da ca 50
+3126.04197531
+avg_rew_episode_carnival da ca 100
+2859.91522366
+avg_rew_episode_carnival si ca 50
+2728.88115942
+avg_rew_episode_carnival si ca 100
+3072.27412588
+
+avg_q_carnival ca original
+1.6511456904
+avg_q_carnival da ca 50
+1.40693986833
+avg_q_carnival da ca 100
+1.44779250338
+avg_q_carnival si ca 50
+1.4474892772
+avg_q_carnival si ca 100
+1.32555948719
+
+---
+
+avg_rew_episode_dem_at da original
+306.25
+avg_rew_episode_dem_at ca da 50
+251.933760684
+avg_rew_episode_dem_at ca da 100
+272.828282828
+avg_rew_episode_dem_at si da 50
+175.313552189
+avg_rew_episode_dem_at si da 100
+141.958874459
+
+avg_q_dem_at da original
+0.975924448837
+avg_q_dem_at ca da 50
+0.779406357091
+avg_q_dem_at ca da 100
+0.794158195872
+avg_q_dem_at si da 50
+0.74815190599
+avg_q_dem_at si da 100
+0.698636090088
+
+---
+
+avg_rew_episode_sp_in si original
+371.875
+avg_rew_episode_sp_in ca si 50
+406.380952381
+avg_rew_episode_sp_in ca si 100
+288.028508772
+avg_rew_episode_sp_in da si 50
+398.72831825
+avg_rew_episode_sp_in da si 100
+439.301587301
+
+avg_q_sp_in si original
+1.11644832429
+avg_q_sp_in ca si 50
+1.28311342142
+avg_q_sp_in ca si 100
+1.38141004728
+avg_q_sp_in da si 50
+1.24234620353
+avg_q_sp_in da si 100
+1.13235956928

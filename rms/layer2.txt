@@ -13,6 +13,7 @@ space_invaders_nips_50_2237009.pkl
 0.353221
 space_invaders_nips_2237009.pkl
 0.402024
+
 carnival_nips_2237007.pkl
 carnival_nips_50_2237007.pkl
 0.355273
@@ -26,6 +27,7 @@ space_invaders_nips_50_2237009.pkl
 0.553054
 space_invaders_nips_2237009.pkl
 0.586478
+
 demon_attack_nips_50_2237014.pkl
 carnival_nips_50_2237007.pkl
 0.3455
@@ -39,6 +41,7 @@ space_invaders_nips_50_2237009.pkl
 0.346499
 space_invaders_nips_2237009.pkl
 0.397164
+
 demon_attack_nips_2237014.pkl
 carnival_nips_50_2237007.pkl
 0.394582
@@ -52,6 +55,7 @@ space_invaders_nips_50_2237009.pkl
 0.395253
 space_invaders_nips_2237009.pkl
 0.440462
+
 space_invaders_nips_50_2237009.pkl
 carnival_nips_50_2237007.pkl
 0.353221
@@ -65,6 +69,7 @@ space_invaders_nips_50_2237009.pkl
 0.0
 space_invaders_nips_2237009.pkl
 0.136527
+
 space_invaders_nips_2237009.pkl
 carnival_nips_50_2237007.pkl
 0.402024
