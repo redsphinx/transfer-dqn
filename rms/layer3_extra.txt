@@ -1,146 +1,146 @@
 Using gpu device 0: Tesla K40m (CNMeM is disabled, cuDNN 4007)
-layer: 4
+layer: 3
 carnival_nips_50_2237007.pkl
 carnival_nips_50_2237007.pkl
-mean w1: 0.0743677 std: 0.164334
-mean w2: 0.0743677 std: 0.164334
+mean w1: -0.00473725 std: 0.0576729
+mean w2: -0.00473725 std: 0.0576729
 carnival_nips_2237007.pkl
-mean w1: 0.0743677 std: 0.164334
-mean w2: 0.0786467 std: 0.164903
-rms: 0.106357
+mean w1: -0.00473725 std: 0.0576729
+mean w2: -0.0117889 std: 0.0809641
+rms: 0.0654225
 demon_attack_nips_50_2237014.pkl
-mean w1: 0.0743677 std: 0.164334
-mean w2: 0.0720414 std: 0.234925
-rms: 0.277547
+mean w1: -0.00473725 std: 0.0576729
+mean w2: -0.00419904 std: 0.0529427
+rms: 0.0778279
 demon_attack_nips_2237014.pkl
-mean w1: 0.0743677 std: 0.164334
-mean w2: 0.0808692 std: 0.251543
-rms: 0.295211
+mean w1: -0.00473725 std: 0.0576729
+mean w2: -0.00744684 std: 0.0739706
+rms: 0.0936997
 space_invaders_nips_50_2237009.pkl
-mean w1: 0.0743677 std: 0.164334
-mean w2: 0.086283 std: 0.147444
-rms: 0.208427
+mean w1: -0.00473725 std: 0.0576729
+mean w2: -0.00734555 std: 0.0588197
+rms: 0.0816403
 space_invaders_nips_2237009.pkl
-mean w1: 0.0743677 std: 0.164334
-mean w2: 0.0661775 std: 0.166118
-rms: 0.220762
+mean w1: -0.00473725 std: 0.0576729
+mean w2: -0.00954185 std: 0.0770086
+rms: 0.0956956
 carnival_nips_2237007.pkl
 carnival_nips_50_2237007.pkl
-mean w1: 0.0786467 std: 0.164903
-mean w2: 0.0743677 std: 0.164334
-rms: 0.106357
+mean w1: -0.0117889 std: 0.0809641
+mean w2: -0.00473725 std: 0.0576729
+rms: 0.0654225
 carnival_nips_2237007.pkl
-mean w1: 0.0786467 std: 0.164903
-mean w2: 0.0786467 std: 0.164903
+mean w1: -0.0117889 std: 0.0809641
+mean w2: -0.0117889 std: 0.0809641
 demon_attack_nips_50_2237014.pkl
-mean w1: 0.0786467 std: 0.164903
-mean w2: 0.0720414 std: 0.234925
-rms: 0.276403
+mean w1: -0.0117889 std: 0.0809641
+mean w2: -0.00419904 std: 0.0529427
+rms: 0.0966784
 demon_attack_nips_2237014.pkl
-mean w1: 0.0786467 std: 0.164903
-mean w2: 0.0808692 std: 0.251543
-rms: 0.294355
+mean w1: -0.0117889 std: 0.0809641
+mean w2: -0.00744684 std: 0.0739706
+rms: 0.10966
 space_invaders_nips_50_2237009.pkl
-mean w1: 0.0786467 std: 0.164903
-mean w2: 0.086283 std: 0.147444
-rms: 0.211666
+mean w1: -0.0117889 std: 0.0809641
+mean w2: -0.00734555 std: 0.0588197
+rms: 0.0996592
 space_invaders_nips_2237009.pkl
-mean w1: 0.0786467 std: 0.164903
-mean w2: 0.0661775 std: 0.166118
-rms: 0.225816
+mean w1: -0.0117889 std: 0.0809641
+mean w2: -0.00954185 std: 0.0770086
+rms: 0.111318
 demon_attack_nips_50_2237014.pkl
 carnival_nips_50_2237007.pkl
-mean w1: 0.0720414 std: 0.234925
-mean w2: 0.0743677 std: 0.164334
-rms: 0.277547
+mean w1: -0.00419904 std: 0.0529427
+mean w2: -0.00473725 std: 0.0576729
+rms: 0.0778279
 carnival_nips_2237007.pkl
-mean w1: 0.0720414 std: 0.234925
-mean w2: 0.0786467 std: 0.164903
-rms: 0.276403
+mean w1: -0.00419904 std: 0.0529427
+mean w2: -0.0117889 std: 0.0809641
+rms: 0.0966784
 demon_attack_nips_50_2237014.pkl
-mean w1: 0.0720414 std: 0.234925
-mean w2: 0.0720414 std: 0.234925
+mean w1: -0.00419904 std: 0.0529427
+mean w2: -0.00419904 std: 0.0529427
 demon_attack_nips_2237014.pkl
-mean w1: 0.0720414 std: 0.234925
-mean w2: 0.0808692 std: 0.251543
-rms: 0.0934813
+mean w1: -0.00419904 std: 0.0529427
+mean w2: -0.00744684 std: 0.0739706
+rms: 0.0595404
 space_invaders_nips_50_2237009.pkl
-mean w1: 0.0720414 std: 0.234925
-mean w2: 0.086283 std: 0.147444
-rms: 0.27011
+mean w1: -0.00419904 std: 0.0529427
+mean w2: -0.00734555 std: 0.0588197
+rms: 0.0785051
 space_invaders_nips_2237009.pkl
-mean w1: 0.0720414 std: 0.234925
-mean w2: 0.0661775 std: 0.166118
-rms: 0.285578
+mean w1: -0.00419904 std: 0.0529427
+mean w2: -0.00954185 std: 0.0770086
+rms: 0.0931361
 demon_attack_nips_2237014.pkl
 carnival_nips_50_2237007.pkl
-mean w1: 0.0808692 std: 0.251543
-mean w2: 0.0743677 std: 0.164334
-rms: 0.295211
+mean w1: -0.00744684 std: 0.0739706
+mean w2: -0.00473725 std: 0.0576729
+rms: 0.0936997
 carnival_nips_2237007.pkl
-mean w1: 0.0808692 std: 0.251543
-mean w2: 0.0786467 std: 0.164903
-rms: 0.294355
+mean w1: -0.00744684 std: 0.0739706
+mean w2: -0.0117889 std: 0.0809641
+rms: 0.10966
 demon_attack_nips_50_2237014.pkl
-mean w1: 0.0808692 std: 0.251543
-mean w2: 0.0720414 std: 0.234925
-rms: 0.0934813
+mean w1: -0.00744684 std: 0.0739706
+mean w2: -0.00419904 std: 0.0529427
+rms: 0.0595404
 demon_attack_nips_2237014.pkl
-mean w1: 0.0808692 std: 0.251543
-mean w2: 0.0808692 std: 0.251543
+mean w1: -0.00744684 std: 0.0739706
+mean w2: -0.00744684 std: 0.0739706
 space_invaders_nips_50_2237009.pkl
-mean w1: 0.0808692 std: 0.251543
-mean w2: 0.086283 std: 0.147444
-rms: 0.286666
+mean w1: -0.00744684 std: 0.0739706
+mean w2: -0.00734555 std: 0.0588197
+rms: 0.0939481
 space_invaders_nips_2237009.pkl
-mean w1: 0.0808692 std: 0.251543
-mean w2: 0.0661775 std: 0.166118
-rms: 0.300777
+mean w1: -0.00744684 std: 0.0739706
+mean w2: -0.00954185 std: 0.0770086
+rms: 0.10639
 space_invaders_nips_50_2237009.pkl
 carnival_nips_50_2237007.pkl
-mean w1: 0.086283 std: 0.147444
-mean w2: 0.0743677 std: 0.164334
-rms: 0.208427
+mean w1: -0.00734555 std: 0.0588197
+mean w2: -0.00473725 std: 0.0576729
+rms: 0.0816403
 carnival_nips_2237007.pkl
-mean w1: 0.086283 std: 0.147444
-mean w2: 0.0786467 std: 0.164903
-rms: 0.211666
+mean w1: -0.00734555 std: 0.0588197
+mean w2: -0.0117889 std: 0.0809641
+rms: 0.0996592
 demon_attack_nips_50_2237014.pkl
-mean w1: 0.086283 std: 0.147444
-mean w2: 0.0720414 std: 0.234925
-rms: 0.27011
+mean w1: -0.00734555 std: 0.0588197
+mean w2: -0.00419904 std: 0.0529427
+rms: 0.0785051
 demon_attack_nips_2237014.pkl
-mean w1: 0.086283 std: 0.147444
-mean w2: 0.0808692 std: 0.251543
-rms: 0.286666
+mean w1: -0.00734555 std: 0.0588197
+mean w2: -0.00744684 std: 0.0739706
+rms: 0.0939481
 space_invaders_nips_50_2237009.pkl
-mean w1: 0.086283 std: 0.147444
-mean w2: 0.086283 std: 0.147444
+mean w1: -0.00734555 std: 0.0588197
+mean w2: -0.00734555 std: 0.0588197
 space_invaders_nips_2237009.pkl
-mean w1: 0.086283 std: 0.147444
-mean w2: 0.0661775 std: 0.166118
-rms: 0.0933578
+mean w1: -0.00734555 std: 0.0588197
+mean w2: -0.00954185 std: 0.0770086
+rms: 0.0591807
 space_invaders_nips_2237009.pkl
 carnival_nips_50_2237007.pkl
-mean w1: 0.0661775 std: 0.166118
-mean w2: 0.0743677 std: 0.164334
-rms: 0.220762
+mean w1: -0.00954185 std: 0.0770086
+mean w2: -0.00473725 std: 0.0576729
+rms: 0.0956956
 carnival_nips_2237007.pkl
-mean w1: 0.0661775 std: 0.166118
-mean w2: 0.0786467 std: 0.164903
-rms: 0.225816
+mean w1: -0.00954185 std: 0.0770086
+mean w2: -0.0117889 std: 0.0809641
+rms: 0.111318
 demon_attack_nips_50_2237014.pkl
-mean w1: 0.0661775 std: 0.166118
-mean w2: 0.0720414 std: 0.234925
-rms: 0.285578
+mean w1: -0.00954185 std: 0.0770086
+mean w2: -0.00419904 std: 0.0529427
+rms: 0.0931361
 demon_attack_nips_2237014.pkl
-mean w1: 0.0661775 std: 0.166118
-mean w2: 0.0808692 std: 0.251543
-rms: 0.300777
+mean w1: -0.00954185 std: 0.0770086
+mean w2: -0.00744684 std: 0.0739706
+rms: 0.10639
 space_invaders_nips_50_2237009.pkl
-mean w1: 0.0661775 std: 0.166118
-mean w2: 0.086283 std: 0.147444
-rms: 0.0933578
+mean w1: -0.00954185 std: 0.0770086
+mean w2: -0.00734555 std: 0.0588197
+rms: 0.0591807
 space_invaders_nips_2237009.pkl
-mean w1: 0.0661775 std: 0.166118
-mean w2: 0.0661775 std: 0.166118
+mean w1: -0.00954185 std: 0.0770086
+mean w2: -0.00954185 std: 0.0770086
